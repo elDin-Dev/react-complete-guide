@@ -1,6 +1,6 @@
-import React from 'react';
+import React, { useState } from 'react';
 
-const person = (props) => {
+const Person = (props) => {
 return (
     <div>
         <p>Hi, I'm {props.name} and I am {props.age} years old</p>
@@ -9,4 +9,4 @@ return (
 )
 }
 
-export default person
+export default Person
