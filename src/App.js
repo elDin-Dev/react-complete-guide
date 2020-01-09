@@ -16,7 +16,7 @@ class App extends Component {
 
   switchNameHandler = (newName) => {
     //console.log('Was clicked');
-    //this.state.persons[0].name='alejandro';
+    //DONT'T DO THHIS: this.state.persons[0].name='alejandro';
     this.setState({
       persons: [
         { name: newName, age: 44 },
@@ -38,6 +38,10 @@ class App extends Component {
 
   togglePersonsHandler = () => {
 
+    console.log('Was clicked + togglePersonsHandler');
+    const doesShow = this.state.showPersons;
+    this.setState({showPersons: !doesShow});
+
   }
   render() {
 
@@ -55,12 +59,12 @@ class App extends Component {
 
         <button
           style={style}
-          onClick={() => this.togglePersonsHandler}>Switch Name</button>
+          onClick={ this.togglePersonsHandler}>Switch Name</button>
 
 
 
 
-        {this.state.showPersons ?
+        {this.state.showPersons === true ?
           <div>
             <Person
               name={this.state.persons[0].name}
