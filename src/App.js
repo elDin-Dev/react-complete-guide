@@ -1,39 +1,52 @@
 import React, { Component } from 'react';
 import './App.css';
 import Person from './Person/Person'
+import person from './Person/Person';
 
 class App extends Component {
 
   state = {
     persons: [
-      { name: "Max", age: 44 },
-      { name: "Alex", age: 32 },
-      { name: "Ciu", age: 49 }
+      { id:'ase2', name: "Max", age: 44 },
+      { id:'455', name: "Alex", age: 32 },
+      { id:'322_', name: "Ciu", age: 49 }
     ],
     otherState: 'some other state',
     showPersons: false,
   };
 
-  switchNameHandler = (newName) => {
-    //console.log('Was clicked');
-    //DONT'T DO THHIS: this.state.persons[0].name='alejandro';
-    this.setState({
-      persons: [
-        { name: newName, age: 44 },
-        { name: "Alex", age: 32 },
-        { name: "Ciu", age: 3 }
-      ]
-    })
+
+  deletePersonHandler = (personIndex) => {
+    
+    //;Clone the persons firstable. If not we are modifying the original state.
+    //const persons = this.state.persons.splice(); //Clone option 1
+    const persons = [...this.state.persons]; //Clone option 2
+    persons.splice(personIndex,1);
+    this.setState({persons: persons});
+
   }
 
-  nameChangehandler = (event) => {
-    this.setState({
-      persons: [
-        { name: 'Max', age: 18 },
-        { name: event.target.value, age: 19 },
-        { name: 'Stephanie', age: 26 }
-      ]
-    })
+  nameChangehandler = (event, id) => {
+  
+    const personIndex= this.state.persons.findIndex(p => {
+      return p.id===id;
+    });
+    
+    //opet1. Copy
+    //const person = Object.assign({}, this.state.persons[personIndex]);
+    //opt2. Copy with spread operator
+    const person = {
+      ...this.state.persons[personIndex]
+    } //Clone the original person. not modify directly
+
+    
+    person.name= event.target.value;
+    const persons=[...this.state.persons]; //1. -Clone state
+    persons[personIndex] = person;          //2. -Update the current state
+
+
+
+    this.setState({persons: persons})
   }
 
   togglePersonsHandler = () => {
@@ -61,17 +74,16 @@ class App extends Component {
 
       persons = (
         <div>
-          <Person
-            name={this.state.persons[0].name}
-            age={this.state.persons[0].age} />
-          <Person
-            name={this.state.persons[1].name}
-            age={this.state.persons[1].age}
-            click={this.switchNameHandler.bind(this, 'Pepe2')}
-            changed={this.nameChangehandler}> Hobbies:Racing</Person>
-          <Person
-            name={this.state.persons[2].name}
-            age={this.state.persons[2].age} />
+          {this.state.persons.map( (person, index) => {
+            return <Person  
+            click={ this.deletePersonHandler.bind(this, index)}
+            name={person.name}
+            age={person.age} 
+            key={person.id} 
+            changed={(event) => this.nameChangehandler(event, person.id)}
+            />
+          })}
+
         </div>
 
       );
