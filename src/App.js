@@ -17,7 +17,10 @@ class App extends Component {
 
 
   deletePersonHandler = (personIndex) => {
-    const persons = this.state.persons;
+    
+    //;Clone the persons firstable. If not we are modifying the original state.
+    //const persons = this.state.persons.splice(); //Clone option 1
+    const persons = [...this.state.persons]; //Clone option 2
     persons.splice(personIndex,1);
     this.setState({persons: persons});
 
