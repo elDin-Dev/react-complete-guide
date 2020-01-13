@@ -26,14 +26,27 @@ class App extends Component {
 
   }
 
-  nameChangehandler = (event) => {
-    this.setState({
-      persons: [
-        { name: 'Max', age: 18 },
-        { name: event.target.value, age: 19 },
-        { name: 'Stephanie', age: 26 }
-      ]
-    })
+  nameChangehandler = (event, id) => {
+  
+    const personIndex= this.state.persons.findIndex(p => {
+      return p.id===id;
+    });
+    
+    //opet1. Copy
+    //const person = Object.assign({}, this.state.persons[personIndex]);
+    //opt2. Copy with spread operator
+    const person = {
+      ...this.state.persons[personIndex]
+    } //Clone the original person. not modify directly
+
+    
+    person.name= event.target.value;
+    const persons=[...this.state.persons]; //1. -Clone state
+    persons[personIndex] = person;          //2. -Update the current state
+
+
+
+    this.setState({persons: persons})
   }
 
   togglePersonsHandler = () => {
@@ -66,7 +79,9 @@ class App extends Component {
             click={ this.deletePersonHandler.bind(this, index)}
             name={person.name}
             age={person.age} 
-            key={person.id}/>
+            key={person.id} 
+            changed={(event) => this.nameChangehandler(event, person.id)}
+            />
           })}
 
         </div>
