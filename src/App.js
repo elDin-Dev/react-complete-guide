@@ -1,15 +1,15 @@
 import React, { Component } from 'react';
 import './App.css';
-import Radium from 'radium';
+import Radium, { StyleRoot } from 'radium';
 import Person from './Person/Person';
 
 class App extends Component {
 
   state = {
     persons: [
-      { id:'ase2', name: "Max", age: 44 },
-      { id:'455', name: "Alex", age: 32 },
-      { id:'322_', name: "Ciu", age: 49 }
+      { id: 'ase2', name: "Max", age: 44 },
+      { id: '455', name: "Alex", age: 32 },
+      { id: '322_', name: "Ciu", age: 49 }
     ],
     otherState: 'some other state',
     showPersons: false,
@@ -17,21 +17,21 @@ class App extends Component {
 
 
   deletePersonHandler = (personIndex) => {
-    
+
     //;Clone the persons firstable. If not we are modifying the original state.
     //const persons = this.state.persons.splice(); //Clone option 1
     const persons = [...this.state.persons]; //Clone option 2
-    persons.splice(personIndex,1);
-    this.setState({persons: persons});
+    persons.splice(personIndex, 1);
+    this.setState({ persons: persons });
 
   }
 
   nameChangehandler = (event, id) => {
-  
-    const personIndex= this.state.persons.findIndex(p => {
-      return p.id===id;
+
+    const personIndex = this.state.persons.findIndex(p => {
+      return p.id === id;
     });
-    
+
     //opet1. Copy
     //const person = Object.assign({}, this.state.persons[personIndex]);
     //opt2. Copy with spread operator
@@ -39,14 +39,14 @@ class App extends Component {
       ...this.state.persons[personIndex]
     } //Clone the original person. not modify directly
 
-    
-    person.name= event.target.value;
-    const persons=[...this.state.persons]; //1. -Clone state
+
+    person.name = event.target.value;
+    const persons = [...this.state.persons]; //1. -Clone state
     persons[personIndex] = person;          //2. -Update the current state
 
 
 
-    this.setState({persons: persons})
+    this.setState({ persons: persons })
   }
 
   togglePersonsHandler = () => {
@@ -60,14 +60,14 @@ class App extends Component {
 
     const style = {
       backgroundColor: 'green',
-      color:'white',
+      color: 'white',
       font: 'inherit',
       border: '1x solid blue',
       padding: '8px',
       cursor: 'pointer',
       ':hover': {
-          backgroundColor: 'lightgreen',
-          color: 'black',
+        backgroundColor: 'lightgreen',
+        color: 'black',
       },
     }
 
@@ -79,13 +79,13 @@ class App extends Component {
 
       persons = (
         <div>
-          {this.state.persons.map( (person, index) => {
-            return <Person  
-            click={ this.deletePersonHandler.bind(this, index)}
-            name={person.name}
-            age={person.age} 
-            key={person.id} 
-            changed={(event) => this.nameChangehandler(event, person.id)}
+          {this.state.persons.map((person, index) => {
+            return <Person
+              click={this.deletePersonHandler.bind(this, index)}
+              name={person.name}
+              age={person.age}
+              key={person.id}
+              changed={(event) => this.nameChangehandler(event, person.id)}
             />
           })}
 
@@ -93,39 +93,41 @@ class App extends Component {
 
       );
 
-      style.backgroundColor='red';
+      style.backgroundColor = 'red';
       style[':hover'] = {
 
-          backgroundColor: 'salmon',
-          color: 'black',
-      
+        backgroundColor: 'salmon',
+        color: 'black',
+
 
       }
 
     }
 
-    let classes = []; 
-    if (this.state.persons.length<=2){
+    let classes = [];
+    if (this.state.persons.length <= 2) {
       classes.push('red');
     }
 
-    if (this.state.persons.length<=1){
+    if (this.state.persons.length <= 1) {
       classes.push('bold');
     }
 
-    
+
     return (
-      <div className="App">
-        <h1>Hi, I'm a React App</h1>
-        <p className={classes.join(' ')}>This is really working</p>
+      <StyleRoot>
+        <div className="App">
+          <h1>Hi, I'm a React App</h1>
+          <p className={classes.join(' ')}>This is really working</p>
 
-        <button
-          style={style}
-          onClick={this.togglePersonsHandler}>Switch Name</button>
+          <button
+            style={style}
+            onClick={this.togglePersonsHandler}>Switch Name</button>
 
-        {persons}
+          {persons}
 
-      </div>
+        </div>
+      </StyleRoot>
     );
   }
 }
