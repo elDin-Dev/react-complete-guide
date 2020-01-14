@@ -93,11 +93,20 @@ class App extends Component {
 
     }
 
+    let classes = []; 
+    if (this.state.persons.length<=2){
+      classes.push('red');
+    }
 
+    if (this.state.persons.length<=1){
+      classes.push('bold');
+    }
 
+    
     return (
       <div className="App">
         <h1>Hi, I'm a React App</h1>
+        <p className={classes.join(' ')}>This is really working</p>
 
         <button
           style={style}
