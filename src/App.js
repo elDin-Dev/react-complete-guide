@@ -57,18 +57,13 @@ class App extends Component {
   }
   render() {
 
-    const style = {
-      backgroundColor: 'green',
-      color: 'white',
-      font: 'inherit',
-      border: '1x solid blue',
-      padding: '8px',
-      cursor: 'pointer',
-    }
 
-    console.log(this.state);
+
+    
 
     let persons = null;
+    let btnClass = '';
+    console.log('axxxxxxx'+btnClass);
 
     if (this.state.showPersons === true) {
 
@@ -88,10 +83,13 @@ class App extends Component {
 
       );
 
-      style.backgroundColor = 'red';
-
+   
+      btnClass=styleClasses.Red
 
     }
+
+
+    console.log(btnClass);
 
     let assignedClasses = [];
     if (this.state.persons.length <= 2) {
@@ -109,7 +107,7 @@ class App extends Component {
           <p className={assignedClasses.join(' ')}>This is really working</p>
 
           <button
-            style={style}
+            className={btnClass}
             onClick={this.togglePersonsHandler}>Switch Name</button>
 
           {persons}
