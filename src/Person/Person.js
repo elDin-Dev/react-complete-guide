@@ -3,14 +3,6 @@ import styleClasses from './Person.module.css'
 
 const person = (props) => {
 
-    const rnd = Math.random();
-
-    if (rnd > 0.7) {
-        throw new Error('Something went wrong');
-    }    
-
-    console.log('-----------------' + rnd);
-
     return (
 
 
