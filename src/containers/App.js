@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import styleClasses from './App.module.css';
-import Person from '../components/Persons/Person/Person';
+import Persons from '../components/Persons/Persons';
+import Cockpit from '../components/Cockpit/Cockpit';
 
 class App extends Component {
 
@@ -50,7 +51,6 @@ class App extends Component {
 
   togglePersonsHandler = () => {
 
-    console.log('Was clicked + togglePersonsHandler');
     const doesShow = this.state.showPersons;
     this.setState({ showPersons: !doesShow });
 
@@ -58,58 +58,23 @@ class App extends Component {
   render() {
 
 
-
-
-
     let persons = null;
-    let btnClass = '';
-    console.log('axxxxxxx' + btnClass);
 
-    if (this.state.showPersons === true) {
+    if (this.state.showPersons) {
 
-      persons = (
-        <div>
-          {this.state.persons.map((person, index) => {
-            return <Person
-                click={this.deletePersonHandler.bind(this, index)}
-                name={person.name}
-                age={person.age}
-                key={person.id}
-                changed={(event) => this.nameChangehandler(event, person.id)}
-              />
-            
-          })}
-
-        </div>
-
-      );
-
-
-      btnClass = styleClasses.Red
-
+      persons = 
+          <Persons
+           persons={this.state.persons}
+           clicked={this.deletePersonHandler}
+           changed={this.nameChangehandler} />;
     }
-
-
-    console.log(btnClass);
-
-    let assignedClasses = [];
-    if (this.state.persons.length <= 2) {
-      assignedClasses.push(styleClasses.red);
-    }
-
-    if (this.state.persons.length <= 1) {
-      assignedClasses.push(styleClasses.bold);
-    }
-
 
     return (
       <div className={styleClasses.App}>
-        <h1>Hi, I'm a React App</h1>
-        <p className={assignedClasses.join(' ')}>This is really working</p>
-
-        <button
-          className={btnClass}
-          onClick={this.togglePersonsHandler}>Switch Name</button>
+        <Cockpit 
+        showPersons={this.state.showPersons}
+        persons={this.state.persons}
+        clicked  = {this.togglePersonsHandler} />
 
         {persons}
 
