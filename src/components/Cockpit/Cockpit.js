@@ -1,5 +1,5 @@
 import React from 'react';
-import styleClasses from './Cockpit';
+import styleClasses from './Cockpit.module.css';
 
 const cockpit = (props) => {
 
@@ -17,6 +17,8 @@ const cockpit = (props) => {
     if (props.persons.length <= 1) {
       assignedClasses.push(styleClasses.bold);
     }
+
+    console.log('kkkkkkkkkk ' + btnClass);
 
     return (
         <div className={styleClasses.Cockpit}>

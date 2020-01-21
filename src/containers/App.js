@@ -44,8 +44,6 @@ class App extends Component {
     const persons = [...this.state.persons]; //1. -Clone state
     persons[personIndex] = person;          //2. -Update the current state
 
-
-
     this.setState({ persons: persons })
   }
 
@@ -53,7 +51,6 @@ class App extends Component {
 
     const doesShow = this.state.showPersons;
     this.setState({ showPersons: !doesShow });
-
   }
   render() {
 
