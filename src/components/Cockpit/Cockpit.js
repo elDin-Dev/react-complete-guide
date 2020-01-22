@@ -18,7 +18,6 @@ const cockpit = (props) => {
       assignedClasses.push(styleClasses.bold);
     }
 
-    console.log('kkkkkkkkkk ' + btnClass);
 
     return (
         <div className={styleClasses.Cockpit}>
