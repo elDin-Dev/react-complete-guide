@@ -3,12 +3,30 @@ import styleClasses from './Cockpit.module.css';
 
 const Cockpit = (props) => {
 
+
+
+    /*useEffect(
+      () => {
+        console.log('[cockpit.js] useEffect');
+        //HTTP request ...
+        setTimeout(()=>{
+            alert('Saved date to cloud!');
+        }, 1000);
+      },
+      [props.persons]
+    ); //ejecuta useEffect solo cuando prosp.persons cambia
+      */
     useEffect(
       () => {
         console.log('[cockpit.js] useEffect');
         //HTTP request ...
-      }
-    );
+        setTimeout(()=>{
+            alert('Saved date to cloud!');
+        }, 1000);
+      },
+      []
+    ); //ejecuta useEffect solo se ejecuta la primera vez
+
 
     let assignedClasses = [];
     let btnClass = '';
