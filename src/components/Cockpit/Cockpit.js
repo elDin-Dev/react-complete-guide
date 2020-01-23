@@ -1,11 +1,8 @@
-import React, {useEffect} from 'react';
-import styleClasses from './Cockpit.module.css';
+import React, { useEffect } from "react";
+import styleClasses from "./Cockpit.module.css";
 
-const Cockpit = (props) => {
-
-
-
-    /*useEffect(
+const Cockpit = props => {
+  /*useEffect(
       () => {
         console.log('[cockpit.js] useEffect');
         //HTTP request ...
@@ -16,6 +13,7 @@ const Cockpit = (props) => {
       [props.persons]
     ); //ejecuta useEffect solo cuando prosp.persons cambia
       */
+  /*
     useEffect(
       () => {
         console.log('[cockpit.js] useEffect');
@@ -25,36 +23,55 @@ const Cockpit = (props) => {
         }, 1000);
       },
       []
-    ); //ejecuta useEffect solo se ejecuta la primera vez
+    ); //ejecuta useEffect solo se ejecuta la primera vez.
+      */
 
+  useEffect(() => {
+    console.log("[cockpit.js] useEffect");
+    //HTTP request ...
+    setTimeout(() => {
+      alert("Saved date to cloud!");
+    }, 1000);
 
-    let assignedClasses = [];
-    let btnClass = '';
+    //Clean up
+    return () => {
+      console.log("[Cockpit.js] cleanup work in useEffect");
+    };
+  }, []); //
 
-    if (props.showPersons) {
-        btnClass = styleClasses.Red
-    }
+  useEffect(() => {
+    console.log("[Cockpit.js] 2nd useEffect");
 
-    if (props.persons.length <= 2) {
-      assignedClasses.push(styleClasses.red);
-    }
+    return () => {
+      console.log("[Cockpit.js] cleanup work in 2nd useEffect");
+    };
+  });
 
-    if (props.persons.length <= 1) {
-      assignedClasses.push(styleClasses.bold);
-    }
+  let assignedClasses = [];
+  let btnClass = "";
 
+  if (props.showPersons) {
+    btnClass = styleClasses.Red;
+  }
 
-    return (
-        <div className={styleClasses.Cockpit}>
-            <h1>Hi, I'm a React-> {props.tittles}</h1>
-            <p className={assignedClasses.join(' ')}>This is really working</p>
+  if (props.persons.length <= 2) {
+    assignedClasses.push(styleClasses.red);
+  }
 
-            <button
-                className={btnClass}
-                onClick={props.clicked}>Switch Name</button>
-        </div>
-    );
+  if (props.persons.length <= 1) {
+    assignedClasses.push(styleClasses.bold);
+  }
 
+  return (
+    <div className={styleClasses.Cockpit}>
+      <h1>Hi, I'm a React-> {props.tittles}</h1>
+      <p className={assignedClasses.join(" ")}>This is really working</p>
+
+      <button className={btnClass} onClick={props.clicked}>
+        Switch Name
+      </button>
+    </div>
+  );
 };
 
 export default Cockpit;
