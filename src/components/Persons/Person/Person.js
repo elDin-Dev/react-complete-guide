@@ -9,14 +9,14 @@ class Person extends Component {
     
         console.log('[Person.js] rendereing...');
         
-        return (
+        return [
 
-            <div className={styleClasses.Person} >
-                <p onClick={this.props.click}>Hi, I'm {this.props.name} and I am {this.props.age} years old</p>
-                <p>{this.props.children}</p>
-                <input type="text" onChange={this.props.changed} value={this.props.name}></input>
-            </div>
-        )
+
+                <p key="i1" onClick={this.props.click}>Hi, I'm {this.props.name} and I am {this.props.age} years old</p>,
+                <p key="i2" >{this.props.children}</p>,
+                <input key="i3" type="text" onChange={this.props.changed} value={this.props.name}></input>,
+
+        ];
     
         
     }
