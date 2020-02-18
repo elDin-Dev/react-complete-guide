@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import Person from './Person/Person';
 
+
+
 class Persons extends Component {
 
   /*
@@ -11,7 +13,7 @@ class Persons extends Component {
   */
 
   shouldComponentUpdate(nextProps, nextState){
-    console.log('[Persons.js] shouldComponentUpdate');
+    console.log('[Persons.js] shouldComponentUpdate - true');
     return true;
     /*
     if (nextProps.persons!== this.props.persons) {
@@ -45,7 +47,6 @@ class Persons extends Component {
           age={person.age}
           key={person.id}
           changed={(event) => this.props.changed(event, person.id)}
-          isAuth={this.props.isAuthenticated}
         />
       );
     });
