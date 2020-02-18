@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useRef } from "react";
 import styleClasses from "./Cockpit.module.css";
 
 const Cockpit = props => {
@@ -25,13 +25,16 @@ const Cockpit = props => {
       []
     ); //ejecuta useEffect solo se ejecuta la primera vez.
       */
+  const toggleButtonRef = useRef(null);
 
   useEffect(() => {
     console.log("[cockpit.js] useEffect");
     //HTTP request ...
-    setTimeout(() => {
+    /*setTimeout(() => {
       alert("Saved date to cloud!");
-    }, 1000);
+    }, 1000);*/
+
+    toggleButtonRef.current.click();
 
     //Clean up
     return () => {
@@ -67,9 +70,14 @@ const Cockpit = props => {
       <h1>Hi, I'm a React-> {props.tittles}</h1>
       <p className={assignedClasses.join(" ")}>This is really working</p>
 
-      <button className={btnClass} onClick={props.clicked}>
+      <button
+        ref={toggleButtonRef}
+        className={btnClass}
+        onClick={props.clicked}
+      >
         Switch Name
       </button>
+      <button onClick={props.login}> Log in</button>
     </div>
   );
 };
